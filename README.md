@@ -1,4 +1,4 @@
-# Práctica 1: ¿Cómo podemos capturar los datos de la web?
+# Dataset: Título del dataset (TODO)
 
 TODO: Descripción general del proyecto.
 
@@ -6,7 +6,7 @@ TODO: Descripción general del proyecto.
 
 - [Descripción](#descripción)
 - [Guía de uso](#guía-de-uso)
-    - [Pasos previos](#pasos-previos)
+    - [Requisitos](#requisitos)
     - [Instrucciones](#instrucciones)
     - [Ejemplos](#ejemplos)
 - [Integrantes del grupo](#intregantes-del-grupo)
@@ -20,19 +20,23 @@ TODO: Apartado donde se describan los archivos que componen el repositorio.
 
 ## Guía de uso
 
-TODO: Apartado donde se describa cómo usar el código del repositorio. Deberá incluir información sobre los posibles parámetros que admita el script y uno o varios ejemplos replicables de su uso.
+TODO: Apartado donde se describa cómo usar el código del repositorio. Deberá incluir (1) información sobre los posibles parámetros que admita el script y (2) uno o varios ejemplos replicables de su uso.
 
-### Pasos previos
+### Requisitos
 
-... (venv)
+Antes de ejecutar el script es necesario instalar todas sus dependencias:
+
+```
+pip install -r requirements.txt
+```
 
 ### Instrucciones
 
-...
+TODO: (1) información sobre los posibles parámetros que admita el script.
 
 ### Ejemplos
 
-...
+TODO: (2) uno o varios ejemplos replicables de su uso.
 
 
 ## Integrantes del grupo

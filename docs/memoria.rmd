@@ -1,0 +1,92 @@
+---
+documentclass: article
+
+header-includes:
+  - \input{formato}
+  
+  - \asignatura{Tipología y ciclo de la vida de los datos}
+  - \actividad{PRACT1}
+  - \titulo{Práctica 1}
+  - \subtitulo{¿Cómo podemos capturar los datos de la web?}
+  - \autor{\begin{tabular}[t]{@{}l@{}}
+        Agustín Barbatelli Balboa\\
+        Adrián Cordones Martínez
+      \end{tabular}}
+output:
+  pdf_document:
+    latex_engine: pdflatex
+    number_sections: true
+    keep_tex: true
+---
+
+```{=latex}
+\sinportada
+
+\criterios{Metadatos}{
+  \item \textbf{Integrantes del grupo:}
+    \begin{itemize}
+      \item Agustín Barbatelli Balboa
+      \item Adrián Cordones Martínez
+    \end{itemize}
+  
+  \item \textbf{Enlace al sitio web objetivo:}\\
+    \url{https:\\...}
+    
+  \item \textbf{Enlace al repositorio con el código}\\
+    \url{https://github.com/adriancordones/Web-scraping}
+    
+  \item \textbf{Enlace al dataset publicado}\\
+    \url{https:\\...}
+    
+  \item \textbf{Enlace al vídeo de explicación}\\
+    \url{https:\\...}
+}
+```
+
+# Contexto
+
+TODO: Explicar en qué contexto específico se han recolectado los datos y argumentar por qué el sitio web seleccionado es una fuente pertinente y fiable de esa información. Indicar la dirección del sitio web.
+
+# Título
+
+TODO: Definir un título conciso y que sea descriptivo para el dataset.
+
+# Descripción
+
+TODO: Desarrollar una breve descripción del conjunto de datos que se ha extraído. Es necesario que esta descripción sea coherente con el título elegido.
+
+# Representación gráfica
+
+TODO: Dibujar un esquema o diagrama que refleje visualmente el dataset y el proyecto elegido.
+
+# Contenido
+
+TODO: Explicar los campos que se incluyen en el dataset y el período de tiempo al que pertenecen los datos.
+
+# Propietario
+
+TODO: Presentar al propietario del conjunto de datos. Es necesario incluir citas de análisis anteriores o, en su defecto, justificar esta búsqueda con análisis similares. Indicar qué pasos se han seguido para actuar de acuerdo con los principios éticos y legales en el contexto del proyecto elegido.
+
+# Inspiración
+
+TODO: Explicar por qué puede ser interesante este conjunto de datos y qué preguntas se pretenden responder con ellos. Es necesario comparar con los análisis anteriores o análisis similares presentados en el apartado 6.
+
+# Licencia
+
+TODO: Seleccionar una licencia adecuada para el dataset resultante y justificar el motivo de su elección.
+
+# Código
+
+TODO: En la memoria se deben comentar los aspectos más relevantes sobre cómo el código realiza el proceso de recolección de datos, qué dificultades presenta el sitio web elegido, y cómo se han resuelto.
+
+# Dataset
+
+TODO: Publicar el dataset obtenido en formato CSV en Zenodo, incluyendo una breve descripción del mismo. Obtener y adjuntar el enlace del DOI del dataset (https://doi.org/...). El dataset también deberá incluirse en la carpeta /dataset del repositorio.
+
+# Vídeo
+
+TODO: Indicar el enlace del vídeo explicativo de la práctica (máximo 10 minutos) en el que se mostrará una presentación del proyecto, destacando los puntos más relevantes, tanto de las respuestas a los apartados como del código utilizado para extraer los datos.
+
+# Referencias {-}
+
+TODO: Referencias y recursos utilizados.
