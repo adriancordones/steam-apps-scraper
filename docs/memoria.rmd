@@ -87,6 +87,32 @@ TODO: Publicar el dataset obtenido en formato CSV en Zenodo, incluyendo una brev
 
 TODO: Indicar el enlace del vídeo explicativo de la práctica (máximo 10 minutos) en el que se mostrará una presentación del proyecto, destacando los puntos más relevantes, tanto de las respuestas a los apartados como del código utilizado para extraer los datos.
 
+# Participación de los integrantes {-}
+
+```{=latex}
+{\renewcommand{\arraystretch}{1.8}
+\setlength{\arrayrulewidth}{1pt}
+
+A continuación, se muestra la tabla de firmas que recoge la contribución de cada integrante a la práctica.
+
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+  \hline
+  \rowcolor{bluetext!20}
+  \textbf{Contribuciones} & \textbf{Firma} \\
+  \hline
+  Investigación previa & Firmas\\
+  \hline
+  Redacción de las respuestas & Firmas \\
+  \hline
+  Desarrollo del código & Firmas \\
+  \hline
+  Participación en el vídeo & Firmas \\
+  \hline
+\end{tabularx}}
+
+\vspace{0.5cm}
+```
+
 # Referencias {-}
 
 TODO: Referencias y recursos utilizados.
