@@ -46,4 +46,4 @@ Esta práctica fue realizada por **Agustín Barbatelli Balboa** y **Adrián Cord
 
 ## Referencias
 
-TODO: Referencias y recursos utilizados.
+- Scrapy Documentation (Version 2.14). Scrapy Project. https://docs.scrapy.org/
