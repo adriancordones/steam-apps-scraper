@@ -12,6 +12,7 @@ class AppsSpider(scrapy.Spider):
 
     def __init__(self, category=None, *args, **kwargs):
         super(AppsSpider, self).__init__(*args, **kwargs)
+        self.urls = None
         
         self.file_path = "apps_urls.json"
         self.developer = "desarrollador"
@@ -19,9 +20,9 @@ class AppsSpider(scrapy.Spider):
 
     async def start(self):
         with open(self.file_path, 'r') as f:
-            urls = json.load(f)
+            self.urls = json.load(f)
         
-        for url in urls:
+        for url in self.urls:
             yield Request(url=url, callback=self.parse_metadata)
 
     def parse_metadata(self, response):
@@ -52,6 +53,7 @@ class AppsSpider(scrapy.Spider):
                 app.editor_name = dev_data.css("::text").get()
                 app.editor_link = dev_data.css("::attr(href)").get().split("?")[0]
             else:
+                # TODO: Cambiar por el log propio de Scrapy
                 logging.warning(f"Wrong dev_type: '{dev_type}'")
         
         tags = response.css("#glanceCtnResponsiveRight .popular_tags a::text").getall()
