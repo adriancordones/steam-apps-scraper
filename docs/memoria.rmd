@@ -126,6 +126,20 @@ TODO: Seleccionar una licencia adecuada para el dataset resultante y justificar 
 
 TODO: En la memoria se deben comentar los aspectos más relevantes sobre cómo el código realiza el proceso de recolección de datos, qué dificultades presenta el sitio web elegido, y cómo se han resuelto.
 
+En este proyecto se ha implementado un proceso de recolección de datos mediante técnicas de web scraping utilizando la librería Scrapy en Python. El objetivo ha sido obtener información relevante sobre videojuegos disponibles en la plataforma Steam a partir de sus páginas públicas.
+
+El flujo de extracción se ha estructurado en dos etapas principales, cada una implementada mediante un spider distinto, lo que permite separar responsabilidades y simplificar la lógica del scraping.
+
+En primer lugar, se ha utilizado un spider encargado de obtener las URLs de los juegos objetivo. Este spider accede a la página de resultados de Steam y extrae los enlaces a juegos individuales. Como resultado, se genera un archivo en formato CSV (urls.csv) que contiene los identificadores y enlaces de cada juego. Esta fase permite desacoplar la obtención de enlaces del scraping de contenido, facilitando la reutilización de datos y la depuración del proceso.
+
+En segundo lugar, se ha empleado un spider adicional (apps_spider) que utiliza como entrada el archivo urls.csv generado previamente. Este spider recorre cada una de las URLs de juegos y accede a sus páginas individuales para extraer información detallada. Entre los datos recolectados se incluyen el identificador del juego, el título, la descripción breve, la fecha de lanzamiento, las etiquetas asociadas, así como información sobre el desarrollador y el editor.
+
+Para la extracción de datos se han utilizado selectores CSS proporcionados por Scrapy, lo que permite identificar de forma estructurada los elementos HTML de interés dentro de cada página. Asimismo, se han incorporado mecanismos de control para evitar errores cuando determinados campos no están presentes, asignando valores nulos en dichos casos y permitiendo que el proceso continúe sin interrupciones.
+
+Uno de los principales retos encontrados durante el desarrollo ha sido la variabilidad en la estructura de las páginas web de Steam, lo que provoca que algunos campos no estén disponibles en todos los casos. Este problema se ha mitigado mediante comprobaciones condicionales antes de procesar los datos, asegurando la robustez del scraping.
+
+Como resultado final del proceso, se ha generado un dataset en formato CSV (games.csv) que contiene información estructurada de múltiples videojuegos, listo para su posterior análisis. Este enfoque modular, basado en dos spiders conectados mediante un archivo intermedio, permite una mayor flexibilidad y escalabilidad del sistema de extracción de datos.
+
 # Dataset
 
 TODO: Publicar el dataset obtenido en formato CSV en Zenodo, incluyendo una breve descripción del mismo. Obtener y adjuntar el enlace del DOI del dataset (https://doi.org/...). El dataset también deberá incluirse en la carpeta /dataset del repositorio.
