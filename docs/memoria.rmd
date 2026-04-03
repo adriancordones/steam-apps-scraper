@@ -47,6 +47,16 @@ output:
 
 TODO: Explicar en qué contexto específico se han recolectado los datos y argumentar por qué el sitio web seleccionado es una fuente pertinente y fiable de esa información. Indicar la dirección del sitio web.
 
+El presente proyecto tiene como objetivo la creación de un dataset a partir de datos extraídos de la plataforma Steam, una de las principales tiendas digitales de videojuegos a nivel mundial.
+
+Steam es una fuente pertinente y fiable para este tipo de análisis, ya que concentra una gran cantidad de información pública sobre videojuegos, incluyendo datos como precios, reseñas de usuarios, fechas de lanzamiento, desarrolladores y características de cada título. Esta información es utilizada habitualmente tanto por jugadores como por desarrolladores para evaluar tendencias del mercado.
+
+En este contexto, el dataset se ha diseñado con el objetivo de analizar el mercado de videojuegos, permitiendo estudiar factores como la relación entre el precio y la recepción del público, la popularidad de ciertos géneros, o las características comunes de los juegos mejor valorados.
+
+Los datos se han obtenido directamente de la web oficial de Steam, accesible en la siguiente dirección:
+
+https://store.steampowered.com/
+
 # Título
 
 TODO: Definir un título conciso y que sea descriptivo para el dataset.
@@ -63,6 +73,30 @@ TODO: Dibujar un esquema o diagrama que refleje visualmente el dataset y el proy
 
 TODO: Explicar los campos que se incluyen en el dataset y el período de tiempo al que pertenecen los datos.
 
+El dataset generado incluye información detallada sobre videojuegos disponibles en la plataforma Steam. Los datos se han estructurado en diferentes variables que permiten analizar tanto características generales de los juegos como su recepción por parte de los usuarios.
+
+Entre los principales campos incluidos en el dataset se encuentran:
+
+- Identificador único del juego (ID)
+- URL del juego en Steam
+- Título
+- Descripción corta
+- Desarrollador y distribuidor
+- Fecha de lanzamiento
+- Información de precios (precio original, precio con descuento y porcentaje de descuento)
+- Compatibilidad con Steam Deck
+- Géneros y etiquetas
+- Número total de reseñas y valoración general
+- Número de reseñas recientes y valoración reciente
+- Idiomas disponibles
+- Número de logros
+- Número de contenidos descargables (DLC)
+- Indicadores booleanos como la presencia de banda sonora o si el juego es un DLC
+
+Opcionalmente, se pueden incorporar métricas adicionales provenientes de SteamSpy, como estimaciones de ventas o número de jugadores, con el objetivo de enriquecer el análisis de mercado.
+
+En cuanto al período temporal, los datos corresponden a videojuegos relativamente recientes, obtenidos a partir de las páginas de resultados de Steam ordenadas por fecha de lanzamiento. Esto permite centrarse en tendencias actuales del mercado.
+
 # Propietario
 
 TODO: Presentar al propietario del conjunto de datos. Es necesario incluir citas de análisis anteriores o, en su defecto, justificar esta búsqueda con análisis similares. Indicar qué pasos se han seguido para actuar de acuerdo con los principios éticos y legales en el contexto del proyecto elegido.
@@ -70,6 +104,19 @@ TODO: Presentar al propietario del conjunto de datos. Es necesario incluir citas
 # Inspiración
 
 TODO: Explicar por qué puede ser interesante este conjunto de datos y qué preguntas se pretenden responder con ellos. Es necesario comparar con los análisis anteriores o análisis similares presentados en el apartado 6.
+
+La motivación principal de este dataset es permitir la realización de un estudio de mercado en el ámbito de los videojuegos. A través del análisis de los datos recopilados, es posible identificar patrones y tendencias que pueden resultar de utilidad tanto para desarrolladores como para analistas del sector.
+
+Entre las posibles preguntas que este dataset permite responder se encuentran:
+
+- Qué géneros de videojuegos son más populares
+- Cómo influye el precio en la valoración de los usuarios
+- Qué características comparten los juegos mejor valorados
+- Qué relación existe entre el número de reseñas y el éxito de un juego
+
+Este tipo de análisis es especialmente relevante en fases iniciales del desarrollo de un videojuego, donde comprender el mercado puede ayudar a tomar decisiones informadas sobre diseño, posicionamiento y estrategia de lanzamiento.
+
+Además, el dataset puede complementarse con fuentes externas como SteamSpy, lo que permitiría ampliar el análisis incorporando estimaciones de ventas y actividad de jugadores, aportando así una visión más completa del mercado.
 
 # Licencia
 
