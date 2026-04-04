@@ -100,9 +100,35 @@ TODO: Explicar en qué contexto específico se han recolectado los datos y
 argumentar por qué el sitio web seleccionado es una fuente pertinente y
 fiable de esa información. Indicar la dirección del sitio web.
 
+El presente proyecto tiene como objetivo la creación de un dataset a
+partir de datos extraídos de la plataforma Steam, una de las principales
+tiendas digitales de videojuegos a nivel mundial.
+
+Steam constituye una fuente pertinente para este proyecto porque ofrece
+información pública y estructurada sobre videojuegos, incluyendo datos
+como nombre del juego, desarrollador, editor, fecha de lanzamiento,
+número de reseñas, descripción y etiquetas. Esta información es
+ampliamente utilizada por usuarios y desarrolladores para analizar
+tendencias del mercado.
+
+Además, el sitio seleccionado cumple con los requisitos del enunciado,
+ya que permite realizar scraping sobre múltiples páginas mediante
+navegación automática, sin depender de una única tabla estática.
+
+Los datos se han obtenido directamente de la web oficial de Steam:
+
+\url{https://store.steampowered.com/}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \section{Título}\label{tuxedtulo}
 
 TODO: Definir un título conciso y que sea descriptivo para el dataset.
+
+Propuesta: Dataset de videojuegos de Steam obtenido mediante técnicas de
+web scraping.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Descripción}\label{descripciuxf3n}
 
@@ -110,85 +136,249 @@ TODO: Desarrollar una breve descripción del conjunto de datos que se ha
 extraído. Es necesario que esta descripción sea coherente con el título
 elegido.
 
+El dataset generado recoge información de videojuegos disponibles en
+Steam mediante un proceso automatizado de scraping desarrollado en
+Python con Scrapy. Cada fila representa un videojuego individual,
+incluyendo información descriptiva, editorial y de popularidad.
+
+El objetivo del dataset es servir como base para futuros análisis
+exploratorios sobre el mercado de videojuegos digitales, permitiendo
+estudiar patrones, tendencias y características comunes entre distintos
+títulos.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \section{Representación gráfica}\label{representaciuxf3n-gruxe1fica}
 
 TODO: Dibujar un esquema o diagrama que refleje visualmente el dataset y
 el proyecto elegido.
+
+Steam (páginas de búsqueda)\\
+↓\\
+Extracción de enlaces (LinksSpider)\\
+↓\\
+Archivo intermedio (apps\_urls.json)\\
+↓\\
+Acceso a páginas individuales (AppsSpider)\\
+↓\\
+Extracción de datos (título, desarrollador, fecha, etc.)\\
+↓\\
+Dataset final (steam\_games.csv)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Contenido}\label{contenido}
 
 TODO: Explicar los campos que se incluyen en el dataset y el período de
 tiempo al que pertenecen los datos.
 
+El dataset generado contiene los siguientes campos:
+
+\begin{itemize}
+\tightlist
+\item
+  id: identificador único del videojuego dentro de Steam\\
+\item
+  title: nombre del videojuego\\
+\item
+  developer\_name: nombre del desarrollador\\
+\item
+  editor\_name: nombre del editor\\
+\item
+  date: fecha de lanzamiento\\
+\item
+  total\_reviews: número total de reseñas del juego\\
+\item
+  short\_desc: breve descripción del videojuego\\
+\item
+  tags: etiquetas asociadas (género, características, etc.)\\
+\item
+  game\_link: enlace a la página del juego en Steam\\
+\item
+  developer\_link: enlace al perfil del desarrollador\\
+\item
+  editor\_link: enlace al perfil del editor
+\end{itemize}
+
+Los datos corresponden al momento en que se ejecuta el scraping, por lo
+que representan una instantánea del estado actual de la plataforma.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \section{Propietario}\label{propietario}
 
 TODO: Presentar al propietario del conjunto de datos. Es necesario
 incluir citas de análisis anteriores o, en su defecto, justificar esta
 búsqueda con análisis similares. Indicar qué pasos se han seguido para
-actuar de acuerdo con los principios éticos y legales en el contexto del
-proyecto elegido.
+actuar de acuerdo con los principios éticos y legales.
+
+El propietario de los datos es la plataforma Steam, desarrollada por
+Valve Corporation.
+
+En cuanto a aspectos éticos y legales, se han seguido las siguientes
+prácticas:
+
+\begin{itemize}
+\tightlist
+\item
+  Se han extraído únicamente datos públicos accesibles sin
+  autenticación\\
+\item
+  No se han utilizado APIs privadas ni mecanismos restringidos\\
+\item
+  Se ha respetado el archivo robots.txt del sitio web\\
+\item
+  Se ha configurado un retraso entre peticiones\\
+\item
+  Se ha utilizado un User-Agent identificable
+\end{itemize}
+
+Estas medidas garantizan un uso responsable del web scraping.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Inspiración}\label{inspiraciuxf3n}
 
 TODO: Explicar por qué puede ser interesante este conjunto de datos y
 qué preguntas se pretenden responder con ellos. Es necesario comparar
-con los análisis anteriores o análisis similares presentados en el
-apartado 6.
+con análisis similares.
+
+El dataset generado permite realizar múltiples análisis sobre la
+industria de los videojuegos. Algunas preguntas que podrían abordarse
+son:
+
+\begin{itemize}
+\tightlist
+\item
+  ¿Qué géneros de videojuegos son más frecuentes?\\
+\item
+  ¿Existe relación entre el número de reseñas y la popularidad de un
+  juego?\\
+\item
+  ¿Qué desarrolladores publican más juegos en la plataforma?\\
+\item
+  ¿Cómo se distribuyen los lanzamientos a lo largo del tiempo?
+\end{itemize}
+
+Este tipo de análisis es similar a otros estudios sobre plataformas
+digitales, donde se buscan patrones de comportamiento y tendencias del
+mercado.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Licencia}\label{licencia}
 
 TODO: Seleccionar una licencia adecuada para el dataset resultante y
 justificar el motivo de su elección.
 
+Se propone la licencia Creative Commons CC BY-NC-SA 4.0.
+
+Esta licencia permite:
+
+\begin{itemize}
+\tightlist
+\item
+  compartir y adaptar el dataset\\
+\item
+  reconocer la autoría\\
+\item
+  restringir el uso comercial\\
+\item
+  mantener la misma licencia en trabajos derivados
+\end{itemize}
+
+La elección se justifica debido a que los datos provienen de una fuente
+externa y se busca un uso principalmente académico.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \section{Código}\label{cuxf3digo}
 
-TODO: En la memoria se deben comentar los aspectos más relevantes sobre
-cómo el código realiza el proceso de recolección de datos, qué
-dificultades presenta el sitio web elegido, y cómo se han resuelto.
+TODO: Comentar los aspectos más relevantes del código, dificultades y
+soluciones.
+
+El proceso de recolección de datos se ha implementado utilizando Scrapy
+en Python.
+
+El sistema se compone de dos spiders:
+
+LinksSpider: Se encarga de recorrer las páginas de búsqueda de Steam y
+extraer los enlaces a videojuegos. Implementa paginación automática para
+descubrir múltiples páginas.
+
+AppsSpider: Utiliza las URLs obtenidas para acceder a cada página
+individual y extraer los datos del dataset mediante selectores CSS.
+
+Dificultades encontradas:
+
+\begin{itemize}
+\tightlist
+\item
+  Variabilidad en la estructura HTML\\
+\item
+  Páginas con restricción de edad (agecheck)\\
+\item
+  Valores faltantes\\
+\item
+  Diferencias de formato en números
+\end{itemize}
+
+Soluciones aplicadas:
+
+\begin{itemize}
+\tightlist
+\item
+  Validación de datos antes de procesarlos\\
+\item
+  Limpieza de datos\\
+\item
+  Filtrado de registros vacíos\\
+\item
+  Uso de selectores robustos
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Dataset}\label{dataset}
 
-TODO: Publicar el dataset obtenido en formato CSV en Zenodo, incluyendo
-una breve descripción del mismo. Obtener y adjuntar el enlace del DOI
-del dataset (\url{https://doi.org/}\ldots). El dataset también deberá
-incluirse en la carpeta /dataset del repositorio.
+TODO: Publicar el dataset en Zenodo y añadir DOI.
+
+El dataset generado se almacena en formato CSV dentro de la carpeta
+/dataset del repositorio.
+
+Cada fila representa un videojuego y cada columna corresponde a uno de
+los atributos definidos.
+
+El dataset ha sido generado automáticamente mediante la ejecución del
+scraper, lo que permite reproducir el proceso.
+
+DOI: TODO
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Vídeo}\label{vuxeddeo}
 
-TODO: Indicar el enlace del vídeo explicativo de la práctica (máximo 10
-minutos) en el que se mostrará una presentación del proyecto, destacando
-los puntos más relevantes, tanto de las respuestas a los apartados como
-del código utilizado para extraer los datos.
+TODO: Añadir enlace al vídeo explicativo.
 
-\section*{Participación de los
-integrantes}\label{participaciuxf3n-de-los-integrantes}
-\addcontentsline{toc}{section}{Participación de los integrantes}
+El vídeo presenta el proyecto, el funcionamiento del scraper y los
+resultados obtenidos.
 
-{\renewcommand{\arraystretch}{1.8}
-\setlength{\arrayrulewidth}{1pt}
+Enlace: TODO
 
-A continuación, se muestra la tabla de firmas que recoge la contribución de cada integrante a la práctica.
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-  \hline
-  \rowcolor{bluetext!20}
-  \textbf{Contribuciones} & \textbf{Firma} \\
-  \hline
-  Investigación previa & Firmas\\
-  \hline
-  Redacción de las respuestas & Firmas \\
-  \hline
-  Desarrollo del código & Firmas \\
-  \hline
-  Participación en el vídeo & Firmas \\
-  \hline
-\end{tabularx}}
-
-\vspace{0.5cm}
-
-\section*{Referencias}\label{referencias}
-\addcontentsline{toc}{section}{Referencias}
+\section{Referencias}\label{referencias}
 
 TODO: Referencias y recursos utilizados.
+
+\begin{itemize}
+\tightlist
+\item
+  Documentación oficial de Scrapy\\
+\item
+  Steam Store\\
+\item
+  Material de la asignatura
+\end{itemize}
 
 \end{document}
