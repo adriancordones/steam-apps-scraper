@@ -87,9 +87,12 @@ DEFAULT_REQUEST_HEADERS = {
 FEED_EXPORT_ENCODING = "utf-8"
 
 FEEDS = {
-    "../dataset/steam_games.csv": {
+    "../dataset/steam_apps.csv": {
         "format": "csv",
         "overwrite": True,
-        "fields": ["id", "title", "developer_name", "editor_name", "date", "total_reviews", "short_desc", "tags", "game_link", "developer_link", "editor_link"],
+        "fields": ["id", "title", "date", "developer_name", "publisher_name", "reviews_total", "reviews_recent",
+                   "reviews_total_summary", "reviews_recent_summary", "original_price", "discount_price", "discount_percent",
+                   "achievements_number", "langs_number", "dlcs_number", "has_ost", "is_dlc", "is_ost", "short_desc", "dlcs",
+                   "tags", "genres", "languages", "url", "developer_url", "publisher_url"],
     }
 }
