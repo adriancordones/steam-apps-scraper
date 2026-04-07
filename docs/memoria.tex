@@ -82,10 +82,10 @@
     \end{itemize}
   
   \item \textbf{Enlace al sitio web objetivo:}\\
-    \url{https:\\...}
+    \url{https://store.steampowered.com}
     
   \item \textbf{Enlace al repositorio con el código}\\
-    \url{https://github.com/adriancordones/Web-scraping}
+    \url{https://github.com/adriancordones/steam-apps-scraper}
     
   \item \textbf{Enlace al dataset publicado}\\
     \url{https:\\...}
@@ -96,289 +96,153 @@
 
 \section{Contexto}\label{contexto}
 
-TODO: Explicar en qué contexto específico se han recolectado los datos y
-argumentar por qué el sitio web seleccionado es una fuente pertinente y
-fiable de esa información. Indicar la dirección del sitio web.
-
-El presente proyecto tiene como objetivo la creación de un dataset a
-partir de datos extraídos de la plataforma Steam, una de las principales
-tiendas digitales de videojuegos a nivel mundial.
-
-Steam constituye una fuente pertinente para este proyecto porque ofrece
-información pública y estructurada sobre videojuegos, incluyendo datos
-como nombre del juego, desarrollador, editor, fecha de lanzamiento,
-número de reseñas, descripción y etiquetas. Esta información es
-ampliamente utilizada por usuarios y desarrolladores para analizar
-tendencias del mercado.
-
-Además, el sitio seleccionado cumple con los requisitos del enunciado,
-ya que permite realizar scraping sobre múltiples páginas mediante
-navegación automática, sin depender de una única tabla estática.
-
-Los datos se han obtenido directamente de la web oficial de Steam:
-
-\url{https://store.steampowered.com/}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+Los datos se han recolectado de la \textit{Steam Store} (enlace: \url{https://store.steampowered.com}), la plataforma de distribución digital de videojuegos de \textit{Valve Corporation}, líder indiscutible del mercado de videojuegos en PC con más de 50.000 títulos disponibles. Steam es una fuente pertinente y fiable porque centraliza en sus páginas de producto información estructurada y actualizada diariamente sobre precios, reseñas de usuarios, metadatos de contenido y características técnicas de cada juego. A diferencia de fuentes secundarias o agregadores, los datos provienen directamente del vendedor, lo que garantiza su precisión y trazabilidad.
 
 \section{Título}\label{tuxedtulo}
 
-TODO: Definir un título conciso y que sea descriptivo para el dataset.
-
-Propuesta: Dataset de videojuegos de Steam obtenido mediante técnicas de
-web scraping.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+El título elegido para el dataset es \textbf{Steam Apps Metadata}.
 
 \section{Descripción}\label{descripciuxf3n}
 
-TODO: Desarrollar una breve descripción del conjunto de datos que se ha
-extraído. Es necesario que esta descripción sea coherente con el título
-elegido.
-
-El dataset generado recoge información de videojuegos disponibles en
-Steam mediante un proceso automatizado de scraping desarrollado en
-Python con Scrapy. Cada fila representa un videojuego individual,
-incluyendo información descriptiva, editorial y de popularidad.
-
-El objetivo del dataset es servir como base para futuros análisis
-exploratorios sobre el mercado de videojuegos digitales, permitiendo
-estudiar patrones, tendencias y características comunes entre distintos
-títulos.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+Este dataset recoge metadatos de aplicaciones publicadas en la \textit{Steam Store}, extraídos mediante web scraping de las páginas individuales de producto. Cada registro corresponde a un juego o aplicación e incluye información identificativa (título, desarrollador, editor), condiciones comerciales (precio, descuento), recepción por parte de los usuarios (número y resumen general de reseñas), características de contenido (DLCs, logros, idiomas, banda sonora) y clasificación temática (géneros y etiquetas de la comunidad). Los datos reflejan el estado de la tienda en el momento de la extracción (7 de abril de 2026) y cubren los títulos más populares y recientes según los resultados de búsqueda de Steam para España y con la página en español.
 
 \section{Representación gráfica}\label{representaciuxf3n-gruxe1fica}
 
-TODO: Dibujar un esquema o diagrama que refleje visualmente el dataset y
-el proyecto elegido.
-
-Steam (páginas de búsqueda)\\
-↓\\
-Extracción de enlaces (LinksSpider)\\
-↓\\
-Archivo intermedio (apps\_urls.json)\\
-↓\\
-Acceso a páginas individuales (AppsSpider)\\
-↓\\
-Extracción de datos (título, desarrollador, fecha, etc.)\\
-↓\\
-Dataset final (steam\_games.csv)
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/diagrama.pdf}
+    \caption{Diagrama simplificado de funcionamiento del Scraper y del dataset resultante}
+\end{figure}
 
 \section{Contenido}\label{contenido}
 
-TODO: Explicar los campos que se incluyen en el dataset y el período de
-tiempo al que pertenecen los datos.
+El dataset contiene 26 campos por registro (no todos obligatorios o siempre presentes). Los campos son los siguientes, agrupados por categoría:
 
-El dataset generado contiene los siguientes campos:
-
-\begin{itemize}
-\tightlist
-\item
-  id: identificador único del videojuego dentro de Steam\\
-\item
-  title: nombre del videojuego\\
-\item
-  developer\_name: nombre del desarrollador\\
-\item
-  editor\_name: nombre del editor\\
-\item
-  date: fecha de lanzamiento\\
-\item
-  total\_reviews: número total de reseñas del juego\\
-\item
-  short\_desc: breve descripción del videojuego\\
-\item
-  tags: etiquetas asociadas (género, características, etc.)\\
-\item
-  game\_link: enlace a la página del juego en Steam\\
-\item
-  developer\_link: enlace al perfil del desarrollador\\
-\item
-  editor\_link: enlace al perfil del editor
+\begin{itemize}[itemsep=-4pt]
+  \item \textbf{id}: identificador numérico de Steam.
+  \item \textbf{title}: nombre del producto en la \textit{Steam Store}.
+  \item \textbf{date}: fecha de lanzamiento.
+  \item \textbf{developer\_name}: nombre del desarrollador.
+  \item \textbf{publisher\_name}: nombre del editor.
+  \item \textbf{reviews\_total}: número total de reseñas.
+  \item \textbf{reviews\_recent}: número de reseñas recientes.
+  \item \textbf{reviews\_total\_summary}: valoración global.
+  \item \textbf{reviews\_recent\_summary}: valoración reciente.
+  \item \textbf{original\_price}: precio base (€).
+  \item \textbf{discount\_price}: precio con descuento (€).
+  \item \textbf{discount\_percent}: descuento aplicado (\%).
+  \item \textbf{achievements\_number}: número de logros.
+  \item \textbf{langs\_number}: número de idiomas soportados.
+  \item \textbf{dlcs\_number}: número de DLCs (sin incluir soundtrack si tiene).
+  \item \textbf{has\_ost}: booleano, indica si tiene banda sonora en el contenido descargable.
+  \item \textbf{is\_dlc}: booleano, indica si el producto es en si un DLC.
+  \item \textbf{is\_ost}: booleano, indica si el producto es en si una banda sonora.
+  \item \textbf{short\_desc}: descripción breve del producto.
+  \item \textbf{dlcs}: listado de DLCs (con separador "|").
+  \item \textbf{tags}: listado de tags (con separador "|").
+  \item \textbf{genres}: listado de géneros (con separador "|").
+  \item \textbf{languages}: listado de idiomas soportados (con separador "|").
+  \item \textbf{url}: URL de la página del producto.
+  \item \textbf{developer\_url}: URL de la página del desarrollador.
+  \item \textbf{publisher\_url}: URL de la página del editor.
 \end{itemize}
-
-Los datos corresponden al momento en que se ejecuta el scraping, por lo
-que representan una instantánea del estado actual de la plataforma.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Propietario}\label{propietario}
 
-TODO: Presentar al propietario del conjunto de datos. Es necesario
-incluir citas de análisis anteriores o, en su defecto, justificar esta
-búsqueda con análisis similares. Indicar qué pasos se han seguido para
-actuar de acuerdo con los principios éticos y legales.
+El propietario de los datos es \textit{Valve Corporation}, empresa americana fundada en Kirkland (USA) en 1996 y propietaria de la plataforma Steam. Los datos publicados en Steam son de acceso público a través del navegador, aunque Valve dispone de una API oficial. En esta práctica se ha optado por scraping directo de las páginas HTML en lugar de la API, conforme a los requisitos de la práctica.
 
-El propietario de los datos es la plataforma Steam, desarrollada por
-Valve Corporation.
+Respecto a análisis anteriores similares, ... TODO (faltan la cita y explicarlos).
 
-En cuanto a aspectos éticos y legales, se han seguido las siguientes
-prácticas:
+En cuanto a los principios éticos y legales seguidos, se muestran a continuación:
 
-\begin{itemize}
-\tightlist
-\item
-  Se han extraído únicamente datos públicos accesibles sin
-  autenticación\\
-\item
-  No se han utilizado APIs privadas ni mecanismos restringidos\\
-\item
-  Se ha respetado el archivo robots.txt del sitio web\\
-\item
-  Se ha configurado un retraso entre peticiones\\
-\item
-  Se ha utilizado un User-Agent identificable
+\begin{itemize}[itemsep=-4pt]
+  \item Se ha revisado el archivo \texttt{robots.txt} de Steam, y se ha comprobado que se permite el acceso de bots genéricos a las páginas que se iban a consultar (principalmente, las secciones de \texttt{search/} y \texttt{app/}). También se ha forzado que se obedezca de forma automática mediante las \texttt{settings} de \textit{Scrapy}.
+  \item No se han extraído datos personales de usuarios.
+  \item Se ha configurado (en el \texttt{settings.py} que proporciona \textit{Scrapy}) un \texttt{DOWNLOAD\_DELAY} de 1 segundo y \texttt{CONCURRENT\_REQUESTS\_PER\_DOMAIN} a 1 para no saturar el servidor.
+  \item Se ha utilizado un \textit{User-Agent} que identifica el cliente como un navegador convencional.
+  \item En aplicaciones con contenido para adultos, se solicitaría la edad al usuario y, una vez verificada, esta información se guardaría en una cookie, evitando así volver a pedirla en futuras visitas. Para superar este \textit{age gate}, se ha creado esta cookie manualmente.
 \end{itemize}
-
-Estas medidas garantizan un uso responsable del web scraping.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Inspiración}\label{inspiraciuxf3n}
 
-TODO: Explicar por qué puede ser interesante este conjunto de datos y
-qué preguntas se pretenden responder con ellos. Es necesario comparar
-con análisis similares.
+El dataset puede ser de interés para múltiples análisis en el ámbito de la Ciencia de Datos aplicada a la industria del videojuego. Algunas preguntas que se pueden responder con estos datos son las siguientes:
 
-El dataset generado permite realizar múltiples análisis sobre la
-industria de los videojuegos. Algunas preguntas que podrían abordarse
-son:
-
-\begin{itemize}
-\tightlist
-\item
-  ¿Qué géneros de videojuegos son más frecuentes?\\
-\item
-  ¿Existe relación entre el número de reseñas y la popularidad de un
-  juego?\\
-\item
-  ¿Qué desarrolladores publican más juegos en la plataforma?\\
-\item
-  ¿Cómo se distribuyen los lanzamientos a lo largo del tiempo?
+\begin{itemize}[itemsep=-4pt]
+  \item ¿El género condiciona el precio final establecido?
+  \item ¿Existe correlación entre el precio y la recepción crítica?
+  \item ¿Qué relación existe entre el número de idiomas soportados y la valoración de los usuarios?
+  \item ¿Los juegos con más DLCs tienden a tener peores reseñas?
+  \item ¿Qué géneros presentan mayor número de logros?
+  \item ¿Qué géneros son más frecuentes?
+  \item ¿Hay géneros con mejor valoraciones que otros?
 \end{itemize}
 
-Este tipo de análisis es similar a otros estudios sobre plataformas
-digitales, donde se buscan patrones de comportamiento y tendencias del
-mercado.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+Respecto a los análisis anteriores... TODO
 
 \section{Licencia}\label{licencia}
 
-TODO: Seleccionar una licencia adecuada para el dataset resultante y
-justificar el motivo de su elección.
+Se propone la licencia \textbf{CC BY-NC-SA 4.0} (Creative Commons Attribution Non Commercial Share Alike 4.0 International). La elección se justifica por varias razones:
 
-Se propone la licencia Creative Commons CC BY-NC-SA 4.0.
-
-Esta licencia permite:
-
-\begin{itemize}
-\tightlist
-\item
-  compartir y adaptar el dataset\\
-\item
-  reconocer la autoría\\
-\item
-  restringir el uso comercial\\
-\item
-  mantener la misma licencia en trabajos derivados
+\begin{itemize}[itemsep=-4pt]
+  \item Los datos provienen de una fuente comercial (Valve/Steam) cuyos términos de servicio no permiten el uso comercial de los datos extraídos.
+  \item ... TODO
 \end{itemize}
-
-La elección se justifica debido a que los datos provienen de una fuente
-externa y se busca un uso principalmente académico.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \section{Código}\label{cuxf3digo}
 
-TODO: Comentar los aspectos más relevantes del código, dificultades y
-soluciones.
+El proyecto está desarrollado en Python con \textit{Scrapy} como framework principal de scraping. La ejecución está orquestada desde \texttt{main.py}, que emplea el \texttt{AsyncCrawlerRunner} de \textit{Scrapy} junto con el reactor asíncrono (\texttt{AsyncioSelectorReactor}), permitiendo encadenar los dos spiders de forma secuencial dentro de un mismo proceso.
 
-El proceso de recolección de datos se ha implementado utilizando Scrapy
-en Python.
+El scraper opera en dos fases. La primera, corre a cargo de \texttt{LinksSpider}, y recorre las páginas de resultados de búsqueda de Steam y extrae los IDs de las aplicaciones listadas a partir del atributo \texttt{data-ds-appid} de cada resultado. La segunda fase, ejecutada por \texttt{AppsSpider}, visita la página de producto de cada ID recogido y extrae sus metadatos mediante selectores CSS. Los datos se exportan automáticamente a un fichero CSV a través del mecanismo \texttt{FEEDS} de Scrapy.
 
-El sistema se compone de dos spiders:
-
-LinksSpider: Se encarga de recorrer las páginas de búsqueda de Steam y
-extraer los enlaces a videojuegos. Implementa paginación automática para
-descubrir múltiples páginas.
-
-AppsSpider: Utiliza las URLs obtenidas para acceder a cada página
-individual y extraer los datos del dataset mediante selectores CSS.
-
-Dificultades encontradas:
-
-\begin{itemize}
-\tightlist
-\item
-  Variabilidad en la estructura HTML\\
-\item
-  Páginas con restricción de edad (agecheck)\\
-\item
-  Valores faltantes\\
-\item
-  Diferencias de formato en números
-\end{itemize}
-
-Soluciones aplicadas:
-
-\begin{itemize}
-\tightlist
-\item
-  Validación de datos antes de procesarlos\\
-\item
-  Limpieza de datos\\
-\item
-  Filtrado de registros vacíos\\
-\item
-  Uso de selectores robustos
-\end{itemize}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+Las principales dificultades afrontadas han sido ... (TODO) 
 
 \section{Dataset}\label{dataset}
 
-TODO: Publicar el dataset en Zenodo y añadir DOI.
+El dataset resultante se ha publicado en \textit{Zenodo} en formato CSV con el siguiente DOI: ... (TODO). Incluye un registro por aplicación de Steam, con los 26 campos descritos en el apartado 5. También se encuentra disponible en la carpeta /dataset del repositorio de \textit{Github}.
 
-El dataset generado se almacena en formato CSV dentro de la carpeta
-/dataset del repositorio.
-
-Cada fila representa un videojuego y cada columna corresponde a uno de
-los atributos definidos.
-
-El dataset ha sido generado automáticamente mediante la ejecución del
-scraper, lo que permite reproducir el proceso.
-
-DOI: TODO
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+\textbf{URL}: \url{https://doi.org/...} (TODO)
 
 \section{Vídeo}\label{vuxeddeo}
 
-TODO: Añadir enlace al vídeo explicativo.
+En este vídeo explicativo se presenta el contexto del proyecto, se describe la arquitectura del scraper y se comentan las principales decisiones técnicas adoptadas.
 
-El vídeo presenta el proyecto, el funcionamiento del scraper y los
-resultados obtenidos.
+\textbf{URL}: \url{https://drive.google.com/...} (TODO)
 
-Enlace: TODO
+\section*{Participación de los
+integrantes}\label{participaciuxf3n-de-los-integrantes}
+\addcontentsline{toc}{section}{Participación de los integrantes}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+{\renewcommand{\arraystretch}{1.8}
+\setlength{\arrayrulewidth}{1pt}
 
-\section{Referencias}\label{referencias}
+A continuación, se muestra la tabla de firmas que recoge la contribución de cada integrante a la práctica.
 
-TODO: Referencias y recursos utilizados.
+\vspace{0.4cm}
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+  \hline
+  \rowcolor{bluetext!20}
+  \textbf{Contribuciones} & \textbf{Firma} \\
+  \hline
+  Investigación previa & \textit{ACM, ABB} \\
+  \hline
+  Redacción de las respuestas & \textit{ACM, ABB} \\
+  \hline
+  Desarrollo del código & \textit{ACM, ABB} \\
+  \hline
+  Participación en el vídeo & \textit{ACM, ABB} \\
+  \hline
+\end{tabularx}}
 
-\begin{itemize}
-\tightlist
-\item
-  Documentación oficial de Scrapy\\
-\item
-  Steam Store\\
-\item
-  Material de la asignatura
+\vspace{0.5cm}
+
+\section*{Referencias}\label{referencias}
+\addcontentsline{toc}{section}{Referencias}
+
+\begin{itemize}[itemsep=-4pt]
+  \item Subirats Maté, L. y Calvo González, M. (2019) Web scraping. Barcelona: Editorial UOC.
+  \item Lawson, R. (2015) Web Scraping with Python: Successfully scrape data from any website with the power of Python. Birmingham: Packt Publishing. ISBN: 9781782164364.
+  \item Scrapy developers (2026) Scrapy documentation (versión 2.14.2). [En línea]. URL: \url{https://docs.scrapy.org/en/latest/} [Consultado: abril de 2026].
+  \item Valve Corporation (2026) Steam Store. [En línea]. URL: \url{https://store.steampowered.com} [Consultado: abril de 2026].
 \end{itemize}
 
 \end{document}
