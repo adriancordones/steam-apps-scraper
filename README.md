@@ -43,7 +43,7 @@ Los parámetros que acepta la ejecución a través de `main.py` se controlan mod
 
 ### Ejemplos
 
-**Ejemplo 1.** Scraping con filtros predeterminados:
+#### **Ejemplo 1.** Scraping con filtros predeterminados:
 
 Se dejan los filtros por defecto: ordenar por relevancia, no incluir juegos F2P, idioma de página web en español y no elegir un idioma de juego por defecto.
 
@@ -59,8 +59,7 @@ python main.py
 ```
 Este ejemplo procesará las 5 primeras páginas de resultados ordenados por relevancia.
 
-
-**Ejemplo 2.** Scraping filtrando para un tag concreto:
+#### **Ejemplo 2.** Scraping filtrando para un tag concreto:
 
 Modificar `main.py`:
 ```python
@@ -74,8 +73,7 @@ python main.py
 ```
 Este ejemplo procesará las 3 primeras páginas de resultados para el tag de `Aventura`.
 
-
-**Ejemplo 3.** Scraping de apps concretas por ID desde la CLI de Scrapy:
+#### **Ejemplo 3.** Scraping de apps concretas por ID desde la CLI de Scrapy:
 
 Alternativamente, `AppsSpider` puede ejecutarse de forma independiente desde la CLI de Scrapy, pasando los IDs como cadena separada por comas.
 
