@@ -28,8 +28,9 @@ class AppsSpider(scrapy.Spider):
     # Default: website lang. spanish
     URL_LABELS = "?l=es"
     # Age Cookie
+    my_birthdate = str(int(datetime(1999, 6, 11).timestamp()))
     AGE_COOKIE = {
-        "birthtime": str(int(datetime(1999, 6, 11).timestamp())),
+        "birthtime": my_birthdate,
         "wants_mature_content": "1"
     }
 

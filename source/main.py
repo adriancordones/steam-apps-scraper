@@ -9,8 +9,6 @@ from steam_scraper.spiders.links_spider import LinksSpider
 from steam_scraper.spiders.apps_spider import AppsSpider
 
 async def crawl(_):
-    configure_logging({"LOG_FORMAT": "%(levelname)s: %(message)s"})
-    
     settings = get_project_settings()
     runner = AsyncCrawlerRunner(settings)
 
@@ -18,5 +16,6 @@ async def crawl(_):
     await runner.crawl(crawler, srt_page=1, end_page=2)
     await runner.crawl(AppsSpider, app_ids=crawler.spider.app_ids)
 
+configure_logging({"LOG_FORMAT": "%(levelname)s: %(message)s"})
 install_reactor("twisted.internet.asyncioreactor.AsyncioSelectorReactor")
 react(deferred_f_from_coro_f(crawl))

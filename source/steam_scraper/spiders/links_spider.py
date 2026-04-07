@@ -10,7 +10,6 @@ class LinksSpider(scrapy.Spider):
     Args:
         srt_page (int): First search results page to scrape.
         end_page (int): Last search results page to scrape (inclusive).
-        app_ids (list, optional): Existing list to extend with new IDs.
         labels (str, optional): URL query string for filters. Defaults to URL_LABELS.
     """
     name = "urls"
@@ -44,4 +43,4 @@ class LinksSpider(scrapy.Spider):
             self.logger.info(f"Apps IDs scraped successfully! (total={len(self.app_ids)})")
             self.logger.debug(f"Apps IDs: {self.app_ids}.")
         else:
-            self.logger.warning(f"Spider closed unexpectedly ({reason}). No missing fields detected.")
+            self.logger.warning(f"Spider closed unexpectedly ({reason}).")
