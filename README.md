@@ -1,6 +1,6 @@
-# Dataset: Título del dataset (TODO)
+# Dataset: Steam Apps Metadata
 
-TODO: Descripción general del proyecto.
+Dataset de metadatos de aplicaciones publicadas en la tienda de Steam (store.steampowered.com), recopilado mediante web scraping con Scrapy. Incluye información comercial, técnica y de reseñas de juegos, DLCs y soundtracks disponibles en la plataforma.
 
 ### Tabla de contenidos
 
@@ -12,19 +12,15 @@ TODO: Descripción general del proyecto.
 - [Integrantes del grupo](#intregantes-del-grupo)
 - [Referencias](#referencias)
 
-
 ## Descripción
 
-TODO: Apartado donde se describan los archivos que componen el repositorio.
-
+El scraper opera en dos fases encadenadas. Primero, `LinksSpider` recorre las páginas de resultados de búsqueda de Steam y recopila los IDs de las aplicaciones listadas. A continuación, `AppsSpider` visita la página de cada aplicación y extrae sus metadatos, que se exportan al CSV final.
 
 ## Guía de uso
 
-TODO: Apartado donde se describa cómo usar el código del repositorio. Deberá incluir (1) información sobre los posibles parámetros que admita el script y (2) uno o varios ejemplos replicables de su uso.
-
 ### Requisitos
 
-Antes de ejecutar el script es necesario instalar todas sus dependencias:
+Antes de ejecutar el script, es necesario instalar todas sus dependencias con:
 
 ```
 pip install -r requirements.txt
@@ -32,18 +28,69 @@ pip install -r requirements.txt
 
 ### Instrucciones
 
-TODO: (1) información sobre los posibles parámetros que admita el script.
+El punto de entrada es `main.py`, que ejecuta ambos spiders de forma secuencial. La configuración del scraper (headers, throttling, ruta de salida, etc.) se gestiona desde `source/steam_apps_scraper/settings.py`.
+
+Los parámetros que acepta la ejecución a través de `main.py` se controlan modificando la llamada a `runner.crawl` en dicho fichero:
+
+**Parámetros de `LinksSpider`:**
+- `srt_page` (int): Primera página de resultados de búsqueda a procesar (default: 1).
+- `end_page` (int): Última página de resultados (inclusive) (default: 1).
+- `labels` (str): Query string con filtros adicionales para la URL (default: `?hidef2p=1&ndl=1&l=es`).
+
+**Parámetros de `AppsSpider`:**
+- `app_ids` (list o str): Lista de IDs de Steam a procesar (default: []).
+- `labels` (str): Query string para la URL de cada app (default: ?l=es).
 
 ### Ejemplos
 
-TODO: (2) uno o varios ejemplos replicables de su uso.
+**Ejemplo 1.** Scraping con filtros predeterminados:
 
+Se dejan los filtros por defecto: ordenar por relevancia, no incluir juegos F2P, idioma de página web en español y no elegir un idioma de juego por defecto.
+
+Modificar `main.py`:
+```python
+await runner.crawl(crawler, srt_page=1, end_page=5)
+```
+
+Y ejecutar:
+```bash
+cd source
+python main.py
+```
+Este ejemplo procesará las 5 primeras páginas de resultados ordenados por relevancia.
+
+**Ejemplo 2.** Scraping filtrando para un tag concreto:
+
+Modificar `main.py`:
+```python
+await runner.crawl(crawler, srt_page=1, end_page=3, labels="?tags=21&hidef2p=1&l=es")
+```
+
+Y ejecutar:
+```bash
+cd source
+python main.py
+```
+Este ejemplo procesará las 3 primeras páginas de resultados para el tag de `Aventura`.
+
+**Ejemplo 3.** Scraping de apps concretas por ID desde la CLI de Scrapy:
+
+Alternativamente, `AppsSpider` puede ejecutarse de forma independiente desde la CLI de Scrapy, pasando los IDs como cadena separada por comas.
+
+Ejemplo:
+```bash
+cd source
+scrapy crawl apps -a app_ids="413150,391540"
+```
+Este ejemplo procesará Stardew Valley y Undertale.
 
 ## Integrantes del grupo
 
 Esta práctica fue realizada por **Agustín Barbatelli Balboa** y **Adrián Cordones Martínez**.
 
-
 ## Referencias
 
-- Scrapy Documentation (Version 2.14). Scrapy Project. https://docs.scrapy.org/
+- Subirats Maté, L. y Calvo González, M. (2019) Web scraping. Barcelona: Editorial UOC.
+- Lawson, R. (2015) Web Scraping with Python: Successfully scrape data from any website with the power of Python. Birmingham: Packt Publishing. ISBN: 9781782164364.
+- Scrapy developers (2026) Scrapy documentation (versión 2.14.2). [En línea]. URL: https://docs.scrapy.org/en/latest/ [Consultado: abril de 2026].
+- Valve Corporation (2026) Steam Store. [En línea]. URL: https://store.steampowered.com [Consultado: abril de 2026].
