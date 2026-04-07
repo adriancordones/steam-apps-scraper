@@ -35,7 +35,7 @@ Los parámetros que acepta la ejecución a través de `main.py` se controlan mod
 **Parámetros de `LinksSpider`:**
 - `srt_page` (int): Primera página de resultados de búsqueda a procesar (default: 1).
 - `end_page` (int): Última página de resultados (inclusive) (default: 1).
-- `labels` (str): Query string con filtros adicionales para la URL (default: `?hidef2p=1&ndl=1&l=es`).
+- `labels` (str): Query string con filtros adicionales para la URL (default: ?hidef2p=1&ndl=1&l=es).
 
 **Parámetros de `AppsSpider`:**
 - `app_ids` (list o str): Lista de IDs de Steam a procesar (default: []).
@@ -59,6 +59,7 @@ python main.py
 ```
 Este ejemplo procesará las 5 primeras páginas de resultados ordenados por relevancia.
 
+
 **Ejemplo 2.** Scraping filtrando para un tag concreto:
 
 Modificar `main.py`:
@@ -72,6 +73,7 @@ cd source
 python main.py
 ```
 Este ejemplo procesará las 3 primeras páginas de resultados para el tag de `Aventura`.
+
 
 **Ejemplo 3.** Scraping de apps concretas por ID desde la CLI de Scrapy:
 
