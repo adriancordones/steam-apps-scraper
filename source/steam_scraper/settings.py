@@ -9,7 +9,7 @@
 
 BOT_NAME = "steam-apps-scraper"
 
-SPIDER_MODULES = ["steam_app_scraper.spiders"]
+SPIDER_MODULES = ["steam_apps_scraper.spiders"]
 NEWSPIDER_MODULE = "steam_apps_scraper.spiders"
 
 ADDONS = {}
@@ -30,8 +30,17 @@ COOKIES_ENABLED = True
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-    "Accept": "*/*",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
     "Accept-Language": "es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7",
+    "DNT": "1",
+    "Priority": "u=0, i",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "none",
+    "Sec-Fetch-User": "?1",
+    "Sec-GPC": "1",
+    "Upgrade-Insecure-Requests": "1"
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
