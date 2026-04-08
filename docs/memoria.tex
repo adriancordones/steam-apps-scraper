@@ -91,7 +91,7 @@
     \url{https:\\...}
     
   \item \textbf{Enlace al vídeo de explicación}\\
-    \url{https:\\...}
+    \url{https://drive.google.com/file/d/1_4P-0rC_je84u0unaYbk-dy7oaR2G-kC/view}
 }
 
 \section{Contexto}\label{contexto}
@@ -243,7 +243,7 @@ w3lib==2.4.1
 zope.interface==8.2
 \end{lstlisting}
 
-La ejecución está orquestada desde el archivo \texttt{main.py}, que emplea el \texttt{AsyncCrawlerRunner} de \textit{Scrapy} junto con el reactor asíncrono (\texttt{AsyncioSelectorReactor}), permitiendo encadenar los dos spiders de forma secuencial dentro de un mismo proceso
+La ejecución está orquestada desde el archivo \texttt{main.py}, que emplea el \texttt{AsyncCrawlerRunner} de \textit{Scrapy} junto con el reactor asíncrono (\texttt{AsyncioSelectorReactor}), permitiendo encadenar los dos spiders de forma secuencial dentro de un mismo proceso.
 
 El scraper opera en dos fases. La primera, corre a cargo de \texttt{LinksSpider}, y recorre las páginas de resultados de búsqueda de Steam y extrae los IDs de las aplicaciones listadas a partir del atributo \texttt{data-ds-appid} de cada resultado. La segunda fase, ejecutada por \texttt{AppsSpider}, visita la página de producto de cada ID recogido y extrae sus metadatos mediante los selectores CSS adecuados. Los datos se exportan automáticamente a un fichero CSV a través del mecanismo \texttt{FEEDS} de Scrapy.
 
@@ -296,7 +296,7 @@ El dataset resultante se ha publicado en \textit{Zenodo} en formato CSV con el s
 
 En este vídeo explicativo se presenta el contexto del proyecto, se describe la arquitectura del scraper y se comentan las principales decisiones técnicas adoptadas.
 
-\textbf{URL}: \url{https://drive.google.com/...} (TODO)
+\textbf{URL}: \url{https://drive.google.com/file/d/1_4P-0rC_je84u0unaYbk-dy7oaR2G-kC/view}
 \newpage
 
 \section*{Participación de los
