@@ -2,6 +2,21 @@
 
 Dataset de metadatos de aplicaciones publicadas en la tienda de Steam (store.steampowered.com), recopilado mediante web scraping con Scrapy. Incluye información comercial, técnica y de reseñas de juegos, DLCs y soundtracks disponibles en la plataforma.
 
+## Estructura del repositorio
+
+- `.gitignore`: Ficheros y directorios excluidos del control de versiones.
+- `LICENSE`: Licencia del proyecto (CC BY-NC-SA 4.0).
+- `README.md`: Descripción general del proyecto y guía de uso.
+- `requirements.txt`: Dependencias necesarias para ejecutar el scraper.
+- `source/main.py`: Punto de entrada: ejecuta ambos spiders de forma secuencial.
+- `source/utils.py`: Funciones auxiliares de parsing y manipulación de texto.
+- `source/steam_apps_scraper/settings.py`: Configuración del proyecto Scrapy (headers, throttling, ruta de salida, etc.).
+- `source/steam_apps_scraper/items.py`: Definición del esquema de campos del ítem scrapeado (`AppItem`).
+- `source/steam_apps_scraper/spiders/links_spider.py`: Spider que recorre páginas de resultados de búsqueda y recopila IDs de apps.
+- `source/steam_apps_scraper/spiders/apps_spider.py`: Spider que visita la página de cada app y extrae sus metadatos.
+- `dataset/steam_apps.csv`: fichero CSV con los metadatos extraídos de cada aplicación de Steam.
+- `docs/`: Documentación y memoria del proyecto.
+
 ### Tabla de contenidos
 
 - [Descripción](#descripción)
@@ -36,17 +51,17 @@ Los parámetros que acepta la ejecución a través de `main.py` se controlan mod
 **Parámetros de `LinksSpider`:**
 - `srt_page` (int): Primera página de resultados de búsqueda a procesar (default: 1).
 - `end_page` (int): Última página de resultados (inclusive) (default: 1).
-- `labels` (str): Query string con filtros adicionales para la URL (default: ?hidef2p=1&ndl=1&l=es).
+- `labels` (str): Query string con filtros adicionales para la URL (default: ?hidef2p=1&ndl=1&l=en).
 
 **Parámetros de `AppsSpider`:**
 - `app_ids` (list o str): Lista de IDs de Steam a procesar (default: []).
-- `labels` (str): Query string para la URL de cada app (default: ?l=es).
+- `labels` (str): Query string para la URL de cada app (default: ?l=en).
 
 ### Ejemplos
 
 #### **Ejemplo 1.** Scraping con filtros predeterminados:
 
-Se dejan los filtros por defecto: ordenar por relevancia, no incluir juegos F2P, idioma de página web en español y no elegir un idioma de juego por defecto.
+Se dejan los filtros por defecto: ordenar por relevancia, no incluir juegos F2P, idioma de página web en inglés y no elegir un idioma de juego por defecto.
 
 Modificar `main.py`:
 ```python
@@ -64,7 +79,7 @@ Este ejemplo procesará las 5 primeras páginas de resultados ordenados por rele
 
 Modificar `main.py`:
 ```python
-await runner.crawl(crawler, srt_page=1, end_page=3, labels="?tags=21&hidef2p=1&l=es")
+await runner.crawl(crawler, srt_page=1, end_page=3, labels="?tags=21&hidef2p=1&l=en")
 ```
 
 Y ejecutar:
