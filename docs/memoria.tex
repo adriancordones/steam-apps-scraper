@@ -104,7 +104,7 @@ El título elegido para el dataset es \textbf{Steam Apps Metadata}.
 
 \section{Descripción}\label{descripciuxf3n}
 
-Este dataset recoge metadatos de aplicaciones publicadas en la \textit{Steam Store}, extraídos mediante web scraping de las páginas individuales de producto. Cada registro corresponde a un juego o aplicación e incluye información identificativa (título, desarrollador, editor), condiciones comerciales (precio, descuento), recepción por parte de los usuarios (número y resumen general de reseñas), características de contenido (DLCs, logros, idiomas, banda sonora) y clasificación temática (géneros y etiquetas de la comunidad). Los datos reflejan el estado de la tienda en el momento de la extracción (7 de abril de 2026) y cubren los títulos más populares y recientes según los resultados de búsqueda de Steam para España y con la página en español.
+Este dataset recoge metadatos de aplicaciones publicadas en la \textit{Steam Store}, extraídos mediante web scraping de las páginas individuales de producto. Cada registro corresponde a un juego o aplicación e incluye información identificativa (título, desarrollador, editor), condiciones comerciales (precio, descuento), recepción por parte de los usuarios (número y resumen general de reseñas), características de contenido (DLCs, logros, idiomas, banda sonora) y clasificación temática (géneros y etiquetas de la comunidad). Los datos reflejan el estado de la tienda en el momento de la extracción (abril de 2026) y cubren los títulos más populares y recientes según los resultados de búsqueda de Steam para España y con la página en español.
 
 \section{Representación gráfica}\label{representaciuxf3n-gruxe1fica}
 
@@ -116,7 +116,7 @@ Este dataset recoge metadatos de aplicaciones publicadas en la \textit{Steam Sto
 
 \section{Contenido}\label{contenido}
 
-El dataset contiene 26 campos por registro (no todos obligatorios o siempre presentes). Los campos son los siguientes, agrupados por categoría:
+El dataset contiene 26 campos por registro (no todos obligatorios ni siempre presentes). Dado que algunos de los datos son de caracter dinámico (pueden variar en el tiempo), hay que tener en cuenta su fecha de extracción: 8 de abril de 2026. Los campos son los siguientes, agrupados por categoría:
 
 \begin{itemize}[itemsep=-4pt]
   \item \textbf{id}: identificador numérico de Steam.
@@ -126,8 +126,8 @@ El dataset contiene 26 campos por registro (no todos obligatorios o siempre pres
   \item \textbf{publisher\_name}: nombre del editor.
   \item \textbf{reviews\_total}: número total de reseñas.
   \item \textbf{reviews\_recent}: número de reseñas recientes.
-  \item \textbf{reviews\_total\_summary}: valoración global.
-  \item \textbf{reviews\_recent\_summary}: valoración reciente.
+  \item \textbf{reviews\_total\_summary}: resumen de valoraciones globales.
+  \item \textbf{reviews\_recent\_summary}: resumen de valoraciones recientes.
   \item \textbf{original\_price}: precio base (€).
   \item \textbf{discount\_price}: precio con descuento (€).
   \item \textbf{discount\_percent}: descuento aplicado (\%).
@@ -149,23 +149,26 @@ El dataset contiene 26 campos por registro (no todos obligatorios o siempre pres
 
 \section{Propietario}\label{propietario}
 
-El propietario de los datos es \textit{Valve Corporation}, empresa americana fundada en Kirkland (USA) en 1996 y propietaria de la plataforma Steam. Los datos publicados en Steam son de acceso público a través del navegador, aunque Valve dispone de una API oficial. En esta práctica se ha optado por scraping directo de las páginas HTML en lugar de la API, conforme a los requisitos de la práctica.
+El propietario de los datos es \textit{Valve Corporation}, empresa americana fundada en Kirkland (USA) en 1996 y propietaria de la plataforma Steam. Los datos publicados en Steam son de acceso público a través del navegador o de su app, aunque Valve también dispone de una API oficial. En esta práctica se ha optado por scraping directo de las páginas HTML en lugar de usar su API, conforme a los requisitos de la práctica.
 
-Respecto a análisis anteriores similares, ... TODO (faltan la cita y explicarlos).
+Respecto a análisis anteriores similares, destacan los trabajos de De Luisa et al. \hyperref[ref:Ref]{[1]} y de Teja et al. \hyperref[ref:Ref]{[2]}. Estos estudios han utilizado datos de Steam con metodologías analíticas sobre variables similares a las que se presentan en nuestro dataset. En el primer estudio, investigaron la relación entre la popularidad de los juegos y características extraídas de Steam, prediciendo el número de jugadores en las primeras etapas tras el lanzamiento mediante un enfoque bayesiano, determinando el impacto del precio, el tamaño, los idiomas soportados, la fecha de lanzamiento y los géneros. En el segundo estudio, compararon múltiples modelos de regresión para predecir la valoración de videojuegos a partir de variables de Steam como géneros y número de jugadores, obteniendo en los mejores modelos un $R^2$ superior al $0.9$.
 
 En cuanto a los principios éticos y legales seguidos, se muestran a continuación:
 
 \begin{itemize}[itemsep=-4pt]
-  \item Se ha revisado el archivo \texttt{robots.txt} de Steam, y se ha comprobado que se permite el acceso de bots genéricos a las páginas que se iban a consultar (principalmente, las secciones de \texttt{search/} y \texttt{app/}). También se ha forzado que se obedezca de forma automática mediante las \texttt{settings} de \textit{Scrapy}.
   \item No se han extraído datos personales de usuarios.
-  \item Se ha configurado (en el \texttt{settings.py} que proporciona \textit{Scrapy}) un \texttt{DOWNLOAD\_DELAY} de 1 segundo y \texttt{CONCURRENT\_REQUESTS\_PER\_DOMAIN} a 1 para no saturar el servidor.
-  \item Se ha utilizado un \textit{User-Agent} que identifica el cliente como un navegador convencional.
-  \item En aplicaciones con contenido para adultos, se solicitaría la edad al usuario y, una vez verificada, esta información se guardaría en una cookie, evitando así volver a pedirla en futuras visitas. Para superar este \textit{age gate}, se ha creado esta cookie manualmente.
+  \item Se ha revisado el archivo \texttt{robots.txt} de Steam, y se ha comprobado que se permite el acceso de bots genéricos a las páginas que se iban a consultar (principalmente, las secciones de \texttt{search/} y \texttt{app/}). También se ha forzado que se obedezca de forma automática activando \texttt{ROBOTSTXT\_OBEY} en las \texttt{settings} de \textit{Scrapy}.
+  \item Se han establecido unos \texttt{DOWNLOAD\_DELAY} y \texttt{CONCURRENT\_REQUESTS\_PER\_DOMAIN} adecuados para limitar la carga sobre el servidor. Adicionalmente, se ha activado la extensión \texttt{AUTOTHROTTLE} de \textit{Scrapy}, que ajusta dinámicamente el intervalo entre peticiones en función de la latencia observada en las respuestas del servidor, eligiendo retardo inicial y el máximo.
+\item Se ha configurado un \textit{User-Agent} que identifica el cliente como un navegador Firefox convencional, evitando así suplantar a otros scrapers conocidos. Adicionalmente, se han incluido cabeceras HTTP estándar (\texttt{Accept}, \texttt{Accept-Language}, \texttt{DNT}, etc.) que reproducen el comportamiento de un navegador real (el de uno de los integrantes del grupo al acceder a Steam).
+  \item En aplicaciones con contenido para adultos, se solicitaría la edad al usuario y, una vez verificada la mayoría de edad, esta información se guardaría en una cookie, evitando así volver a pedirla en futuras visitas. Para superar este \textit{age gate}, se ha proporcionado la mencionada cookie manualmente.
 \end{itemize}
 
 \section{Inspiración}\label{inspiraciuxf3n}
 
-El dataset puede ser de interés para múltiples análisis en el ámbito de la Ciencia de Datos aplicada a la industria del videojuego. Algunas preguntas que se pueden responder con estos datos son las siguientes:
+El dataset puede ser de interés para múltiples análisis en el ámbito de la Ciencia de Datos aplicada a la industria del videojuego. Analizar tendencias de consumo puede ayudar a orientar estrategias comerciales basadas en la popularidad, precios y características de los títulos. 
+\vspace{0.2cm}
+
+Algunas preguntas que se pueden responder con estos datos son las siguientes:
 
 \begin{itemize}[itemsep=-4pt]
   \item ¿El género condiciona el precio final establecido?
@@ -173,28 +176,115 @@ El dataset puede ser de interés para múltiples análisis en el ámbito de la C
   \item ¿Qué relación existe entre el número de idiomas soportados y la valoración de los usuarios?
   \item ¿Los juegos con más DLCs tienden a tener peores reseñas?
   \item ¿Qué géneros presentan mayor número de logros?
-  \item ¿Qué géneros son más frecuentes?
-  \item ¿Hay géneros con mejor valoraciones que otros?
+  \item ¿Qué géneros tienen una mayor saturación de mercado?
+  \item ¿Hay géneros con mejores valoraciones en promedio que otros?
 \end{itemize}
 
-Respecto a los análisis anteriores... TODO
+\vspace{0.2cm}
+Respecto a los análisis anteriores, nuestro dataset comparte con el estudio de De Luisa et al. \hyperref[ref:Ref]{[1]} el interés por variables como el precio, los idiomas soportados y los géneros como factores explicativos. Respecto al trabajo de Teja et al. \hyperref[ref:Ref]{[2]}, el dataset generado incluye tanto variables numéricas como categóricas que permitirían reproducir o ampliar su análisis de predicción de valoraciones, añadiendo además información sobre otros campos como DLCs, reseñas recientes y descuentos activos, que no estaban presentes en los datos utilizados por dichos autores.
+
+Vemos que nuestro dataset puede ser útil tanto para análisis predictivos que partan del estado actual de mercado como para análisis descriptivos o exploratorios. Por tanto, explotar los datos públicos de Steam puede ser de interés, especialmente para tener un mejor conocimiento del mercado de videojuegos.
 
 \section{Licencia}\label{licencia}
 
-Se propone la licencia \textbf{CC BY-NC-SA 4.0} (Creative Commons Attribution Non Commercial Share Alike 4.0 International). La elección se justifica por varias razones:
+Se propone la licencia \textbf{CC BY-NC-SA 4.0} (Creative Commons Attribution Non Commercial Share Alike 4.0 International) \hyperref[ref:Ref]{[3]}. La elección se justifica por varias razones:
 
 \begin{itemize}[itemsep=-4pt]
-  \item Los datos provienen de una fuente comercial (Valve/Steam) cuyos términos de servicio no permiten el uso comercial de los datos extraídos.
-  \item ... TODO
+  \item Los datos provienen de una fuente comercial (Steam) cuyos términos de servicio no permiten el uso comercial de los datos extraídos. El término \textit{NonCommercial} (NoComercial) permite que no se comprometan los derechos del propietario original (Valve) de los datos.
+  \item El término \textit{ShareAlike} (CompartirIgual) garantiza que cualquier trabajo derivado de este mantenga las mismas condiciones de uso, preservando el carácter abierto del dataset.
+  \item El término \textit{Attribution} (Atribución) asegura que los autores del dataset sean reconocidos en trabajos posteriores que lo utilicen, lo que es especialmente relevante teniendo en cuenta que el dataset es accesible de forma pública.
+  \item Teniendo en cuenta que esto es una práctica universitaria, esta licencia también es apropiada porque permite la reutilización y el análisis libre del dataset por parte de otros estudiantes.
 \end{itemize}
 
 \section{Código}\label{cuxf3digo}
 
-El proyecto está desarrollado en Python con \textit{Scrapy} como framework principal de scraping. La ejecución está orquestada desde \texttt{main.py}, que emplea el \texttt{AsyncCrawlerRunner} de \textit{Scrapy} junto con el reactor asíncrono (\texttt{AsyncioSelectorReactor}), permitiendo encadenar los dos spiders de forma secuencial dentro de un mismo proceso.
+El proyecto está desarrollado en Python usando \textit{Scrapy} como framework principal de scraping. Las librerías y versiones utilizadas se muestran en el archivo \texttt{requirements.txt} del repositorio y a continuación:
 
-El scraper opera en dos fases. La primera, corre a cargo de \texttt{LinksSpider}, y recorre las páginas de resultados de búsqueda de Steam y extrae los IDs de las aplicaciones listadas a partir del atributo \texttt{data-ds-appid} de cada resultado. La segunda fase, ejecutada por \texttt{AppsSpider}, visita la página de producto de cada ID recogido y extrae sus metadatos mediante selectores CSS. Los datos se exportan automáticamente a un fichero CSV a través del mecanismo \texttt{FEEDS} de Scrapy.
+\vspace{0.2cm}
+\begin{lstlisting}[numbers=none]
+attrs==26.1.0
+Automat==25.4.16
+certifi==2026.2.25
+cffi==2.0.0
+charset-normalizer==3.4.7
+constantly==23.10.4
+cryptography==46.0.6
+cssselect==1.4.0
+dataclasses==0.6
+DateTime==6.0
+defusedxml==0.7.1
+filelock==3.25.2
+hyperlink==21.0.0
+idna==3.11
+Incremental==24.11.0
+itemadapter==0.13.1
+itemloaders==1.4.0
+jmespath==1.1.0
+lxml==6.0.2
+packaging==26.0
+parsel==1.11.0
+Protego==0.6.0
+pyasn1==0.6.3
+pyasn1_modules==0.4.2
+pycparser==3.0
+PyDispatcher==2.0.7
+pyOpenSSL==26.0.0
+pytz==2026.1.post1
+queuelib==1.9.0
+requests==2.33.1
+requests-file==3.0.1
+Scrapy==2.14.2
+service-identity==24.2.0
+tldextract==5.3.1
+Twisted==25.5.0
+typing_extensions==4.15.0
+urllib3==2.6.3
+w3lib==2.4.1
+zope.interface==8.2
+\end{lstlisting}
 
-Las principales dificultades afrontadas han sido ... (TODO) 
+La ejecución está orquestada desde el archivo \texttt{main.py}, que emplea el \texttt{AsyncCrawlerRunner} de \textit{Scrapy} junto con el reactor asíncrono (\texttt{AsyncioSelectorReactor}), permitiendo encadenar los dos spiders de forma secuencial dentro de un mismo proceso
+
+El scraper opera en dos fases. La primera, corre a cargo de \texttt{LinksSpider}, y recorre las páginas de resultados de búsqueda de Steam y extrae los IDs de las aplicaciones listadas a partir del atributo \texttt{data-ds-appid} de cada resultado. La segunda fase, ejecutada por \texttt{AppsSpider}, visita la página de producto de cada ID recogido y extrae sus metadatos mediante los selectores CSS adecuados. Los datos se exportan automáticamente a un fichero CSV a través del mecanismo \texttt{FEEDS} de Scrapy.
+
+\vspace{0.2cm}
+Las principales dificultades afrontadas han sido las siguientes:
+
+\vspace{0.2cm}
+\textbf{Gestión del \textit{age gate}.}
+
+Como ya se ha indicado antes, Steam redirige automáticamente las páginas de aplicaciones con contenido para adultos a una pantalla de verificación de edad antes de mostrar el contenido. Se han observado dos variantes: una redirección a \texttt{/agecheck/app/\{id\}/} y una pantalla de confirmación sin redirección. En ambos casos el mecanismo de verificación es el mismo: comprobar la presencia de una cookie \texttt{birthtime} con un timestamp Unix que indique mayoría de edad. Para resolverlo, se construyó manualmente dicha cookie y se incluyó en todas las peticiones de \texttt{AppsSpider} mediante el parámetro \texttt{cookies} del objeto \texttt{Request} de \textit{Scrapy}.
+
+\vspace{0.2cm}
+\textbf{Control contra bloqueos}
+
+En un principio no se habían configurado de forma correcta las opciones del scraper, por lo que se encontraron los siguientes errores:
+
+\begin{itemize}[itemsep=-4pt]
+  \item \textbf{Error 403} (\textit{Forbidden}): el servidor ha recibido la petición, pero rechaza autorizarla.
+  \item \textbf{Error 429} (\textit{Too Many Requests}): demasiadas peticiones en poco tiempo.
+\end{itemize}
+
+El primer error ocurría cuando el \texttt{DOWNLOAD\_DELAY} era demasiado pequeño, de modo que el servidor directamente bloqueaba todas las peticiones entrantes. El segundo error sucedía cuando se activó correctamente el \texttt{DOWNLOAD\_DELAY} y el \texttt{AUTOTHROTTLE}, pero el número de peticiones por minuto era superior a las que Steam permitía, por lo que aún algunas eran bloqueadas. Tras pocas iteraciones, se encontraron los valores óptimos en los que Steam permitía todas las peticiones entrantes, evitando saturar el servidor, aplicando los \texttt{settings} que se han mencionado en el apartado 6.
+
+\vspace{0.2cm}
+\textbf{Variabilidad en la estructura de las páginas de apps.}
+
+No todas las páginas de producto presentan sus datos de la misma forma. Por ello, se ha tenido que realizar una exploración previa y hacer que el scraper distinga según cada caso. Entre los casos más complejos que se han gestionado han estado el del precio y las reseñas. 
+
+Para los precios se identificaron dos estructuras distintas: precio regular sin descuento, representado por el elemento \texttt{div.game\_purchase\_price.price} y precio con descuento activo, donde el precio original aparece en \texttt{div.discount\_original\_price}, el precio final en \texttt{div.discount\_final\_price} y el porcentaje en \texttt{div.discount\_pct}. El código gestiona estas situaciones de forma explícita, registrando un \textit{warning} cuando ninguna de las estructuras conocidas es detectada (ayudando así a hacer debug de estas situaciones). Adicionalmente estarían los casos de ls \textit{Free2Play} que se han excluido en la propia búsqueda por no ser de interés analítico en los análisis que se planteaban. 
+
+En cuanto a las reseñas, Steam puede presentarlas de formas distintas según el volumen y distribución de las mismas. Cuando existen suficientes reseñas en el idioma del usuario, Steam puede variar la estructura en la que se presentan las reseñas. Principalmente, Steam puede mostrar un bloque \texttt{div.outlier\_totals}, que contiene dos filas, generalmente con las reseñas globales totales y recientes de forma separada. En otros casos, solo se muestran las reseñas globales a través de \texttt{\#app\_reviews\_hash}. Dentro del primer caso, además, puede darse la situación de que el bloque \texttt{outlier\_totals} contenga únicamente una fila (solo globales) en lugar de las dos habituales (globales y recientes). El código distingue todos estos escenarios mediante comprobaciones explícitas de la longitud de las listas de números de reseñas y valoración promedia extraídos.
+
+\vspace{0.2cm}
+\textbf{Detección y exclusión de contenido descargable no relevante.}
+
+La sección de DLCs de un juego puede incluir bandas sonoras listadas como contenido descargable. Para el análisis posterior podría ser relevante distinguir si un juego dispone de banda sonora oficial como DLC separado de si dispone de DLCs de contenido jugable. El scraper filtra los elementos cuyo nombre termina en \textit{soundtrack} antes de construir la lista de DLCs, registrando su presencia en el campo booleano \texttt{has\_ost}. Adicionalmente, los campos \texttt{is\_dlc} e \texttt{is\_ost} detectan si el propio producto scrapeado es en sí mismo un DLC o una banda sonora, mediante la presencia de los elementos \texttt{div.game\_area\_dlc\_bubble} y \texttt{div.game\_area\_soundtrack\_bubble} respectivamente.
+
+\vspace{0.2cm}
+\textbf{URLs de desarrollador y editor no informativas.}
+
+En algunos casos, los enlaces de desarrollador o editor en la página del producto apuntan a \texttt{https://store.steampowered.com/search/} en lugar de a una página de desarrollador real. Esto ocurre cuando Steam no tiene una página de perfil propia para ese estudio o publisher. El scraper detecta este caso y almacena \texttt{None} en lugar de la URL genérica, que carecería de valor analítico.
 
 \section{Dataset}\label{dataset}
 
@@ -207,6 +297,7 @@ El dataset resultante se ha publicado en \textit{Zenodo} en formato CSV con el s
 En este vídeo explicativo se presenta el contexto del proyecto, se describe la arquitectura del scraper y se comentan las principales decisiones técnicas adoptadas.
 
 \textbf{URL}: \url{https://drive.google.com/...} (TODO)
+\newpage
 
 \section*{Participación de los
 integrantes}\label{participaciuxf3n-de-los-integrantes}
@@ -235,14 +326,14 @@ A continuación, se muestra la tabla de firmas que recoge la contribución de ca
 
 \vspace{0.5cm}
 
-\section*{Referencias}\label{referencias}
-\addcontentsline{toc}{section}{Referencias}
-
-\begin{itemize}[itemsep=-4pt]
-  \item Subirats Maté, L. y Calvo González, M. (2019) Web scraping. Barcelona: Editorial UOC.
-  \item Lawson, R. (2015) Web Scraping with Python: Successfully scrape data from any website with the power of Python. Birmingham: Packt Publishing. ISBN: 9781782164364.
-  \item Scrapy developers (2026) Scrapy documentation (versión 2.14.2). [En línea]. URL: \url{https://docs.scrapy.org/en/latest/} [Consultado: abril de 2026].
-  \item Valve Corporation (2026) Steam Store. [En línea]. URL: \url{https://store.steampowered.com} [Consultado: abril de 2026].
-\end{itemize}
+\begin{thebibliography}{9}\label{ref:Ref}
+  \bibitem{R1} De Luisa, A., Hartman, J., Nabergoj, D., Pahor, S., Rus, M., Stevanoski, B., Demšar, J. y Štrumbelj, E. (2021). Predicting the Popularity of Games on Steam. arXiv:2110.02896. URL: \url{https://arxiv.org/abs/2110.02896}
+  \bibitem{R2} Teja, A. S., Hanafi, M. L. I. y Qomariyah, N. N. (2023). Predicting Steam Games Rating with Regression. E3S Web of Conferences, ICOBAR 2023. URL: \url{https://www.e3s-conferences.org/articles/e3sconf/pdf/2023/25/e3sconf_icobar2023_02001.pdf}
+  \bibitem{R3} Creative Commons (2023) Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional. [En línea]. URL: \url{https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es} [Consultado: abril de 2026].
+  \bibitem{R4} Subirats Maté, L. y Calvo González, M. (2019) Web scraping. Barcelona: Editorial UOC.
+  \bibitem{R5} Lawson, R. (2015) Web Scraping with Python: Successfully scrape data from any website with the power of Python. Birmingham: Packt Publishing. ISBN: 9781782164364.
+  \bibitem{R6} Scrapy developers (2026) Scrapy documentation (versión 2.14.2). [En línea]. URL: \url{https://docs.scrapy.org/en/latest/} [Consultado: abril de 2026].
+  \bibitem{R7} Valve Corporation (2026) Steam Store. [En línea]. URL: \url{https://store.steampowered.com} [Consultado: abril de 2026].
+\end{thebibliography}
 
 \end{document}
