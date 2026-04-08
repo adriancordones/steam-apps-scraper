@@ -2,6 +2,22 @@
 
 Dataset de metadatos de aplicaciones publicadas en la tienda de Steam (store.steampowered.com), recopilado mediante web scraping con Scrapy. Incluye información comercial, técnica y de reseñas de juegos, DLCs y soundtracks disponibles en la plataforma.
 
+### Tabla de contenidos
+
+- [Descripción](#descripción)
+- [Estructura del repositorio](#estructura-del-repositorio)
+- [Guía de uso](#guía-de-uso)
+    - [Requisitos](#requisitos)
+    - [Instrucciones](#instrucciones)
+    - [Ejemplos](#ejemplos)
+- [Integrantes del grupo](#intregantes-del-grupo)
+- [Licencia](#licencia)
+- [Referencias](#referencias)
+
+## Descripción
+
+El scraper opera en dos fases encadenadas. Primero, `LinksSpider` recorre las páginas de resultados de búsqueda de Steam y recopila los IDs de las aplicaciones listadas. A continuación, `AppsSpider` visita la página de cada aplicación y extrae sus metadatos, que se exportan al CSV final.
+
 ## Estructura del repositorio
 
 - `.gitignore`: Ficheros y directorios excluidos del control de versiones.
@@ -16,21 +32,6 @@ Dataset de metadatos de aplicaciones publicadas en la tienda de Steam (store.ste
 - `source/steam_apps_scraper/spiders/apps_spider.py`: Spider que visita la página de cada app y extrae sus metadatos.
 - `dataset/steam_apps.csv`: fichero CSV con los metadatos extraídos de cada aplicación de Steam.
 - `docs/`: Documentación y memoria del proyecto.
-
-### Tabla de contenidos
-
-- [Descripción](#descripción)
-- [Guía de uso](#guía-de-uso)
-    - [Requisitos](#requisitos)
-    - [Instrucciones](#instrucciones)
-    - [Ejemplos](#ejemplos)
-- [Integrantes del grupo](#intregantes-del-grupo)
-- [Licencia](#licencia)
-- [Referencias](#referencias)
-
-## Descripción
-
-El scraper opera en dos fases encadenadas. Primero, `LinksSpider` recorre las páginas de resultados de búsqueda de Steam y recopila los IDs de las aplicaciones listadas. A continuación, `AppsSpider` visita la página de cada aplicación y extrae sus metadatos, que se exportan al CSV final.
 
 ## Guía de uso
 
