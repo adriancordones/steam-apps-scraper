@@ -3,7 +3,7 @@ import scrapy
 from scrapy import Request
 from datetime import datetime
 
-from steam_scraper.items import AppItem
+from steam_apps_scraper.items import AppItem
 from utils import get_text, join_fields, split_first, parse_value, set_price
 
 class AppsSpider(scrapy.Spider):
@@ -17,6 +17,31 @@ class AppsSpider(scrapy.Spider):
     """
     name = "apps"
     allowed_domains = ["store.steampowered.com"]
+    custom_settings = {
+        # Download delay
+        "DOWNLOAD_DELAY": 1.75,
+
+        # Autothrottle
+        "AUTOTHROTTLE_ENABLED": True,
+        # The initial download delay
+        "AUTOTHROTTLE_START_DELAY": 1.75,
+        # The maximum download delay to be set in case of high latencies
+        "AUTOTHROTTLE_MAX_DELAY": 5,
+        # The average number of requests Scrapy should be sending in parallel to
+        # each remote server
+        "AUTOTHROTTLE_TARGET_CONCURRENCY": 1.0,
+
+        "FEEDS": {
+            "../dataset/steam_apps.csv": {
+                "format": "csv",
+                "overwrite": False,
+                "fields": ["id", "title", "date", "developer_name", "publisher_name", "reviews_total", "reviews_recent",
+                        "reviews_total_summary", "reviews_recent_summary", "original_price", "discount_price", "discount_percent",
+                        "achievements_number", "langs_number", "dlcs_number", "has_ost", "is_dlc", "is_ost", "short_desc", "dlcs",
+                        "tags", "genres", "languages", "url", "developer_url", "publisher_url"],
+            }
+        }
+    }
     
     REQUIRED = ["id", "url", "title", "date", "original_price", "dlcs_number", "has_ost", "is_dlc", "is_ost"]
     DEV_MAP = {
@@ -25,8 +50,8 @@ class AppsSpider(scrapy.Spider):
         "developer": ("developer_name", "developer_url"),
         "publisher": ("publisher_name", "publisher_url")
     }
-    # Default: website lang. spanish
-    URL_LABELS = "?l=es"
+    # Default: website lang. english
+    URL_LABELS = "?l=en"
     # Age Cookie
     my_birthdate = str(int(datetime(1999, 6, 11).timestamp()))
     AGE_COOKIE = {
@@ -49,6 +74,7 @@ class AppsSpider(scrapy.Spider):
         if not self.app_ids:
             self.logger.error("Missing app ids!")
             return
+        self.logger.info(f"Scraping {len(self.app_ids)} items!")
         for app_id in self.app_ids:
             url = f"https://store.steampowered.com/app/{app_id}/{self.labels}"
             yield Request(url=url, callback=self.parse, cookies=self.AGE_COOKIE)

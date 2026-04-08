@@ -14,9 +14,23 @@ class LinksSpider(scrapy.Spider):
     """
     name = "urls"
     allowed_domains = ["store.steampowered.com"]
+    custom_settings = {
+        # Download delay
+        "DOWNLOAD_DELAY": 1.75,
 
-    # Default: hide Free2Play, not default lang. (in games) and website lang. spanish
-    URL_LABELS = "?hidef2p=1&ndl=1&l=es"
+        # Autothrottle
+        "AUTOTHROTTLE_ENABLED": True,
+        # The initial download delay
+        "AUTOTHROTTLE_START_DELAY": 1.75,
+        # The maximum download delay to be set in case of high latencies
+        "AUTOTHROTTLE_MAX_DELAY": 5,
+        # The average number of requests Scrapy should be sending in parallel to
+        # each remote server
+        "AUTOTHROTTLE_TARGET_CONCURRENCY": 1.0
+    }
+
+    # Default: hide Free2Play, not default lang. (in games) and website lang. english
+    URL_LABELS = "?hidef2p=1&ndl=1&l=en"
 
     def __init__(self, srt_page=1, end_page=1, labels=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -36,7 +50,7 @@ class LinksSpider(scrapy.Spider):
     def parse(self, response):
         app_ids = response.css("a.search_result_row.ds_collapse_flag::attr(data-ds-appid)").getall()
         app_ids = [parse_value(app_id, to_int=True) for app_id in app_ids]
-        self.app_ids.extend(app_ids)
+        self.app_ids.extend([app_id for app_id in app_ids if app_id is not None])
     
     def closed(self, reason):
         if reason == "finished":

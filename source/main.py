@@ -13,7 +13,7 @@ async def crawl(_):
     runner = AsyncCrawlerRunner(settings)
 
     crawler = runner.create_crawler(LinksSpider)
-    await runner.crawl(crawler, srt_page=1, end_page=1000)
+    await runner.crawl(crawler, srt_page=1, end_page=300)
     await runner.crawl(AppsSpider, app_ids=crawler.spider.app_ids)
 
 configure_logging({"LOG_FORMAT": "%(levelname)s: %(message)s"})

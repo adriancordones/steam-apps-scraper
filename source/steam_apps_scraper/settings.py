@@ -21,9 +21,9 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
-# Concurrency and throttling settings
+# Concurrency settings
+CONCURRENT_REQUESTS = 1
 CONCURRENT_REQUESTS_PER_DOMAIN = 1
-DOWNLOAD_DELAY = 1
 
 # Enable cookies
 COOKIES_ENABLED = True
@@ -47,9 +47,9 @@ DEFAULT_REQUEST_HEADERS = {
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-AUTOTHROTTLE_START_DELAY = 1
+AUTOTHROTTLE_START_DELAY = 2
 # The maximum download delay to be set in case of high latencies
-AUTOTHROTTLE_MAX_DELAY = 10
+AUTOTHROTTLE_MAX_DELAY = 5
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
 AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
@@ -60,7 +60,7 @@ FEED_EXPORT_ENCODING = "utf-8"
 FEEDS = {
     "../dataset/steam_apps.csv": {
         "format": "csv",
-        "overwrite": True,
+        "overwrite": False,
         "fields": ["id", "title", "date", "developer_name", "publisher_name", "reviews_total", "reviews_recent",
                    "reviews_total_summary", "reviews_recent_summary", "original_price", "discount_price", "discount_percent",
                    "achievements_number", "langs_number", "dlcs_number", "has_ost", "is_dlc", "is_ost", "short_desc", "dlcs",
